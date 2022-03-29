@@ -32,7 +32,7 @@
                 <td class="px-4 py-3">
                     <form action="deleteuser" method="POST">
                         @csrf
-                        <button name="{{$user->id}}" type="submit" class="bg-yellow-400 px-8">Delete</button>
+                        <button name="id" value="{{$user->id}}" type="submit" class="bg-yellow-400 px-8">Delete</button>
                     </form>
                 </td>
               </tr>                  

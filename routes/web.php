@@ -17,5 +17,5 @@ use App\Http\Controllers\UserController;
 Route::resource('', UserController::class);
 Route::post('/createuser', [UserController::class, 'create']);
 Route::post('/insertuser', [UserController::class, 'store']);
-Route::post('/deleteuser', [UserController::class, 'delete']);
 Route::post('/refreshpage', [UserController::class, 'refresh']);
+Route::post('/deleteuser', [UserController::class, 'destroy']);

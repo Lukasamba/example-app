@@ -87,8 +87,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('id');
+        DB::table('users')->where('id', '=', $id)->delete();
+        return view('user.index');
     }
 }
