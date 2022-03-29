@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,13 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::resource('', UserController::class);
+//Route::get('/', function () {
+ //   return view('home');
+//});
+Route::get('', [HomeController::class, 'index']);
+Route::get('/userlist', [UserController::class, 'index']);
 
-Route::resource('', UserController::class);
-Route::post('/createuser', [UserController::class, 'create']);
 Route::post('/insertuser', [UserController::class, 'store']);
-Route::get('/', [UserController::class, 'index']);
+Route::post('/refreshpage', [UserController::class, 'refresh']);
+Route::post('/deleteuser', [UserController::class, 'destroy']);

@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function refresh()
+    {
+        return view('user.index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        //
     }
 
     /**
@@ -82,8 +87,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('id');
+        DB::table('users')->where('id', '=', $id)->delete();
+        return view('user.index');
     }
 }
