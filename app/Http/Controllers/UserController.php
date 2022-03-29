@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function refresh()
+    {
+        return view('user.index');
+    }
+
     /**
      * Display a listing of the resource.
      *
