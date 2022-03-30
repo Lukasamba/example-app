@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Hash;
 
-class UserController extends Controller
+class RegistrationController extends Controller
 {
-    public function refresh()
-    {
-        return view('user.index');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index');
+        return view('authorization.register');
     }
 
     /**
@@ -40,11 +36,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $fname = $request->input('name');
-        DB::table('userlist')->insert(
-            ['name' => $fname]
-        );
-        return view('user.index');
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email|unique:users',
+            'password'=>'required|min:5|max:20'
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $result = $user->save();
+        if($result){
+            return back()->with('success', 'Register successful.');
+        } else{
+            return back()->with('fail', 'Register failed.');
+        }
     }
 
     /**
@@ -87,10 +93,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $id = $request->input('id');
-        DB::table('userlist')->where('id', '=', $id)->delete();
-        return view('user.index');
+        //
     }
 }
