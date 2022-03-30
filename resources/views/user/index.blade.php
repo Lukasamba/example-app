@@ -15,7 +15,7 @@
         <th class="px-4 py-3">Name</th>
       </tr>
       @php
-          $users = DB::table('users')->get();
+          $users = DB::table('userlist')->get();
       @endphp
       @foreach ($users as $user)
       <tr class="bg-gray-100 border-b border-gray-200">

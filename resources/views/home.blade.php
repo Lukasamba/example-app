@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <title>Document</title>
+        <title>Home</title>
     </head>
 <body>
     <h1>
@@ -35,11 +35,18 @@
                 <div class="md:flex items-center" :class="isOpen ? 'block' : 'hidden'">
                   <div class="flex flex-col mt-2 md:flex-row md:mt-0 md:mx-1">
                     <a class="my-1 text-sm text-gray-700 leading-5 hover:text-blue-600 hover:underline md:mx-4 md:my-0" href="{{url('/')}}">Home</a>
+                    @if (Session::has('loginId'))
+                      <a class="my-1 text-sm text-gray-700 leading-5 hover:text-blue-600 hover:underline md:mx-4 md:my-0" href="{{url('/profile')}}">Profile</a>
+                    @endif
                   </div>
           
                   <div class="flex items-center py-2 -mx-1 md:mx-0">
-                    <a class="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-gray-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-2 md:w-auto" href="#">Login</a>
-                    <a class="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-blue-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-0 md:w-auto" href="#">Register</a>
+                    @if (!Session::has('loginId'))
+                      <a class="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-gray-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-2 md:w-auto" href="{{url('login')}}">Login</a>
+                      <a class="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-blue-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-0 md:w-auto" href="{{url('register')}}">Register</a>
+                    @else
+                      <a class="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm bg-gray-500 font-medium text-white leading-5 hover:bg-blue-600 md:mx-2 md:w-auto" href="{{url('logout')}}">Log out</a>
+                    @endif
                   </div>
           
                   <!-- Search input on mobile screen -->
@@ -50,7 +57,6 @@
               </div>
           
               <div class="mt-3 py-3 -mx-3 overflow-y-auto whitespace-no-wrap scroll-hidden">
-                <a class="text-sm text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0" href="#">News</a>
                 <a class="text-sm text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0" href="#">Movies</a>
                 <a class="text-sm text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0" href="#">Games</a>
                 <a class="text-sm text-gray-700 leading-5 hover:text-blue-600 hover:underline mx-4 md:my-0" href="{{url('userlist')}}">Users</a>
