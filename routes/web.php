@@ -24,7 +24,7 @@ Route::get('', [HomeController::class, 'index']);
 Route::get('/userlist', [UserController::class, 'index']);
 
 Route::post('/insertuser', [UserController::class, 'store']);
-Route::post('/refreshpage', [UserController::class, 'refresh']);
+//Route::post('/userlist', [UserController::class, 'index']);
 Route::post('/deleteuser', [UserController::class, 'destroy']);
 
 Route::get('/register', [RegistrationController::class, 'index'])->middleware('alreadyLoggedIn');
