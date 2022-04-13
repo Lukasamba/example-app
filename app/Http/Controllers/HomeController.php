@@ -10,4 +10,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function openMoviesPage()
+    {
+        return view('movies.moviesHome');
+    }
+
+    public function openGamesPage()
+    {
+        return view('games.gamesHome');
+    }
 }

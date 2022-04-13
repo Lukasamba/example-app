@@ -7,17 +7,17 @@
         <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
         <title>Home</title>
     </head>
-<body>
+<body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">IMDB</a>
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Movies</a>
+              <a class="nav-link" href="movies">Movies</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Games</a>
+              <a class="nav-link" href="games">Games</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="userlist">Users</a>
@@ -49,5 +49,6 @@
     </nav>
 
     @yield('content')
+    
 </body>
 </html>

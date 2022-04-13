@@ -24,7 +24,6 @@ Route::get('', [HomeController::class, 'index']);
 Route::get('/userlist', [UserController::class, 'index']);
 
 Route::post('/insertuser', [UserController::class, 'store']);
-//Route::post('/userlist', [UserController::class, 'index']);
 Route::post('/deleteuser', [UserController::class, 'destroy']);
 
 Route::get('/register', [RegistrationController::class, 'index'])->middleware('alreadyLoggedIn');
@@ -35,3 +34,6 @@ Route::post('/trylogin', [LoginController::class, 'login'])->middleware('already
 
 Route::get('/profile', [LoginController::class, 'showProfile'])->middleware('isLoggedIn');
 Route::get('/logout', [LoginController::class, 'logout']);
+
+Route::get('/movies', [HomeController::class, 'openMoviesPage']);
+Route::get('/games', [HomeController::class, 'openGamesPage']);
