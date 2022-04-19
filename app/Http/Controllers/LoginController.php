@@ -22,7 +22,10 @@ class LoginController extends Controller
         $user = User::where('email','=', $request->email)->first();
         if($user){
             if(Hash::check($request->password, $user->password)){
-                $request->session()->put('loginId', $user->id);
+                $request->session()->put('userInfo', [
+                    'id' => $user->id,
+                    'isAdmin' => $user->admin
+                ]);
                 return redirect('');
             } else {
                 return back()->with('fail','Password does not match.');
@@ -35,16 +38,16 @@ class LoginController extends Controller
     public function showProfile()
     {
         $data = array();
-        if(Session::has('loginId')){
-            $data = User::where('id', '=', Session::get('loginId'))->first();
+        if(Session::has('userInfo')){
+            $data = User::where('id', '=', Session::get('userInfo')['id'])->first();
         }
         return view('user.profile', compact('data'));
     }
 
     public function logout()
     {
-        if(Session::has('loginId')){
-            Session::pull('loginId');
+        if(Session::has('userInfo')){
+            Session::pull('userInfo');
             return redirect('');
         }
         else {

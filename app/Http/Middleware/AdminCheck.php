@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use DB;
 
-class AuthCheck
+class AdminCheck
 {
     /**
      * Handle an incoming request.
@@ -16,9 +17,18 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Session()->has('userInfo')){
+        if(Session()->has('userInfo')){
+            $currentId = Session()->get('userInfo')['id'];
+            $isAdmin = DB::table('users')->where('id', $currentId)->value('admin');
+            if($isAdmin == 'YES'){
+                return $next($request);
+            }
+            else {
+                return redirect('/');
+            }
+        }
+        else {
             return redirect('login')->with('fail','You have to login first.');
         }
-        return $next($request);
     }
 }

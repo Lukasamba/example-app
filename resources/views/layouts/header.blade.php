@@ -14,32 +14,42 @@
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="movies">Movies</a>
+              <a class="nav-link" href="/movies">Movies</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="games">Games</a>
+              <a class="nav-link" href="/tvseries">TV Series</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="userlist">Users</a>
+              <a class="nav-link" href="/games">Games</a>
             </li>
+            @if ((Session()->has('userInfo')))
+              @if ((Session()->get('userInfo')['isAdmin']) == "YES"))
+              <li class="nav-item">
+                <a class="nav-link" href="/userlist">Users</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin">Admin</a>
+              </li>
+              @endif
+            @endif
           </ul>
           <ul class="navbar-nav ms-auto d-flex">
-            @if (!Session::has('loginId'))
+            @if (!Session::has('userInfo'))
                 
             <li class="nav-item">
-              <a class="nav-link" href="login">Login</a>
+              <a class="nav-link" href="/login">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="register">Register</a>
+              <a class="nav-link" href="/register">Register</a>
             </li>
 
             @else
 
             <li class="nav-item">
-              <a class="nav-link" href="profile">Profile</a>
+              <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="logout">Log out</a>
+              <a class="nav-link" href="/logout">Log out</a>
             </li>
             
             @endif
