@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
+use DB;
 
 class LoginController extends Controller
 {
@@ -37,11 +38,26 @@ class LoginController extends Controller
 
     public function showProfile()
     {
-        $data = array();
-        if(Session::has('userInfo')){
-            $data = User::where('id', '=', Session::get('userInfo')['id'])->first();
+        $userid = Session::get('userInfo')['id'];
+        $users = DB::table('users')->where('id', $userid)->get();
+        foreach($users as $user){
+            $id = $user->id;
+            $name = $user->name;
+            $email = $user->email;
         }
-        return view('user.profile', compact('data'));
+        return view('user.profile')->with('id', $id)->with('name', $name)->with('email', $email);
+    }
+
+    public function saveEditedProfile(Request $request)
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $result = DB::table('users')->where('id', $id)->update([
+            'name' => $name,
+            'email' => $email
+        ]);
+        return view('user.profile')->with('id', $id)->with('name', $name)->with('email', $email);
     }
 
     public function logout()

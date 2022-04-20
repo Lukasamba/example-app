@@ -7,9 +7,6 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\LoginController;
 
 Route::get('', [HomeController::class, 'index']);
-Route::get('/userlist', [UserController::class, 'index'])->middleware('isAdmin');
-Route::post('/insertuser', [UserController::class, 'store'])->middleware('isAdmin');
-Route::post('/deleteuser', [UserController::class, 'destroy'])->middleware('isAdmin');
 
 Route::get('/register', [RegistrationController::class, 'index'])->middleware('alreadyLoggedIn');
 Route::post('/tryregister', [RegistrationController::class, 'store'])->middleware('alreadyLoggedIn');
@@ -18,6 +15,7 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('alreadyLogg
 Route::post('/trylogin', [LoginController::class, 'login'])->middleware('alreadyLoggedIn');
 
 Route::get('/profile', [LoginController::class, 'showProfile'])->middleware('isLoggedIn');
+Route::post('/profile/editsave', [LoginController::class, 'saveEditedProfile'])->name('saveEditedProfile');
 Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::get('/movies', [HomeController::class, 'openMoviesPage']);
@@ -31,3 +29,5 @@ Route::get('/admin/tvseries', [HomeController::class, 'openTVSeriesList'])->midd
 Route::get('/admin/games', [HomeController::class, 'openGamesList'])->middleware('isAdmin');
 
 Route::post('/admin/users/changeuseradmin', [HomeController::class, 'changeUserAdminStatus'])->name('changeAdminStatus')->middleware('isAdmin');
+Route::post('/admin/users/edit', [HomeController::class, 'editOrDelete'])->middleware('isAdmin')->name('editOrDelete');
+Route::post('/admin/users/editsave', [HomeController::class, 'saveEditedInfo'])->middleware('isAdmin')->name('saveEditedInfo');

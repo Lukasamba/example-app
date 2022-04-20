@@ -25,9 +25,6 @@
             @if ((Session()->has('userInfo')))
               @if ((Session()->get('userInfo')['isAdmin']) == "YES"))
               <li class="nav-item">
-                <a class="nav-link" href="/userlist">Users</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="/admin">Admin</a>
               </li>
               @endif
