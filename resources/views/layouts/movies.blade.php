@@ -40,65 +40,24 @@
   <div class="text-dark rounded bg-dark mt-5 me-5 pt-2 pe-5 pb-5" style="width: 75%; float: right">
 
     <div class="ms-3 mt-1 row row-cols-1 row-cols-md-5 g-4">
+      @php
+        $movies = DB::table('movies')->get();
+      @endphp
 
+      @foreach ($movies as $movie)
+          
       <div class="col">
         <div class="card h-100">
-          <img src="https://upload.wikimedia.org/wikipedia/lt/0/00/Spider-Man_No_Way_Home_poster.jpg" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top" alt="...">
+          <img src="{{$movie->imageUrl}}" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Spider-Man: No Way Home</h5>
+            <h5 class="card-title">{{$movie->name}}</h5>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://upload.wikimedia.org/wikipedia/lt/0/00/Spider-Man_No_Way_Home_poster.jpg" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Spider-Man: No Way Home</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://upload.wikimedia.org/wikipedia/lt/0/00/Spider-Man_No_Way_Home_poster.jpg" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Spider-Man: No Way Home</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://upload.wikimedia.org/wikipedia/lt/0/00/Spider-Man_No_Way_Home_poster.jpg" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Spider-Man: No Way Home</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://upload.wikimedia.org/wikipedia/lt/0/00/Spider-Man_No_Way_Home_poster.jpg" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Spider-Man: No Way Home</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://upload.wikimedia.org/wikipedia/lt/0/00/Spider-Man_No_Way_Home_poster.jpg" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Spider-Man: No Way Home</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://upload.wikimedia.org/wikipedia/lt/0/00/Spider-Man_No_Way_Home_poster.jpg" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Spider-Man: No Way Home</h5>
-          </div>
-        </div>
-      </div>
+
+      @endforeach
+
     </div>
-    
   </div>
 </div>
 

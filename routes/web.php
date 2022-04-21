@@ -31,3 +31,8 @@ Route::get('/admin/games', [HomeController::class, 'openGamesList'])->middleware
 Route::post('/admin/users/changeuseradmin', [HomeController::class, 'changeUserAdminStatus'])->name('changeAdminStatus')->middleware('isAdmin');
 Route::post('/admin/users/edit', [HomeController::class, 'editOrDelete'])->middleware('isAdmin')->name('editOrDelete');
 Route::post('/admin/users/editsave', [HomeController::class, 'saveEditedInfo'])->middleware('isAdmin')->name('saveEditedInfo');
+
+Route::get('/admin/movies/add', [HomeController::class, 'openAddMoviePage'])->middleware('isAdmin')->name('openAddMoviePage');
+Route::post('/admin/movies/addMovie', [HomeController::class, 'addMovie'])->middleware('isAdmin')->name('addMovie');
+Route::post('/admin/movies/edit', [HomeController::class, 'openEditMoviePage'])->middleware('isAdmin')->name('openEditMoviePage');
+Route::post('/admin/movies/editMovie', [HomeController::class, 'saveEditedMovieInfo'])->middleware('isAdmin')->name('editMovie');
