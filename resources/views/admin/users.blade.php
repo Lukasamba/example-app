@@ -30,7 +30,7 @@
                       <form class="form-inline me-3" action="{{route('changeAdminStatus')}}" method="POST">
                         @csrf
                         <div class="form-group" style="float: left">
-                          @if (($user->id) == 1)
+                          @if (($user->id) == 4)
                             <select name="adminStatus" id="adminStatus" class="form-select" disabled>
                                 @if (($user->admin) == 'YES')
                                     <option value="YES">Yes</option>
