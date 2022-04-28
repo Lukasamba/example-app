@@ -20,4 +20,11 @@
       0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
   ),
+  'spatie/laravel-ignition' => 
+  array (
+    'aliases' => 
+    array (
+      'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
+    ),
+  ),
 );

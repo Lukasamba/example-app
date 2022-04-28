@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WatchlistController;
 
 Route::get('', [HomeController::class, 'index']);
 
@@ -19,6 +20,11 @@ Route::post('/profile/editsave', [LoginController::class, 'saveEditedProfile'])-
 Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::get('/movies', [HomeController::class, 'openMoviesPage']);
+Route::get('/movies/{category}', [HomeController::class, 'openMoviesPageByCategory']);
+Route::any('/movie/{id}', [HomeController::class, 'openMovieById']);
+Route::post('/movie/{id}/addtowatchlist', [WatchlistController::class, 'add'])->middleware('alreadyLoggedIn');
+Route::post('/movie/{id}/deletefromwatchlist', [WatchlistController::class, 'delete'])->middleware('alreadyLoggedIn');
+
 Route::get('/tvseries', [HomeController::class, 'openTVSeriesPage']);
 Route::get('/games', [HomeController::class, 'openGamesPage']);
 
@@ -36,3 +42,5 @@ Route::get('/admin/movies/add', [HomeController::class, 'openAddMoviePage'])->mi
 Route::post('/admin/movies/addMovie', [HomeController::class, 'addMovie'])->middleware('isAdmin')->name('addMovie');
 Route::post('/admin/movies/edit', [HomeController::class, 'openEditMoviePage'])->middleware('isAdmin')->name('openEditMoviePage');
 Route::post('/admin/movies/editMovie', [HomeController::class, 'saveEditedMovieInfo'])->middleware('isAdmin')->name('editMovie');
+
+Route::get('/watchlist/movies', [WatchlistController::class, 'index'])->middleware('alreadyLoggedIn');

@@ -9,31 +9,31 @@
             <h2>Genre</h2>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Action</a>
+          <a class="nav-link text-light" href="/movies/action">Action</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Adventure</a>
+          <a class="nav-link text-light" href="/movies/adventure">Adventure</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Comedy</a>
+          <a class="nav-link text-light" href="/movies/comedy">Comedy</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Drama</a>
+          <a class="nav-link text-light" href="/movies/drama">Drama</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Fantasy</a>
+          <a class="nav-link text-light" href="/movies/fantasy">Fantasy</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Horror</a>
+          <a class="nav-link text-light" href="/movies/horror">Horror</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Romance</a>
+          <a class="nav-link text-light" href="/movies/romance">Romance</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Sci-Fi</a>
+          <a class="nav-link text-light" href="/movies/scifi">Sci-Fi</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Superhero</a>
+          <a class="nav-link text-light" href="/movies/superhero">Superhero</a>
         </li>
     </ul>
   </div>
@@ -41,7 +41,7 @@
 
     <div class="ms-3 mt-1 row row-cols-1 row-cols-md-5 g-4">
       @php
-        $movies = DB::table('movies')->get();
+        $movies = DB::table('movies')->where('category', $category)->get();
       @endphp
 
       @foreach ($movies as $movie)

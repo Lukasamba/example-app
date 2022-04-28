@@ -28,6 +28,9 @@
                 <a class="nav-link" href="/admin">Admin</a>
               </li>
               @endif
+              <li class="nav-item">
+                <a class="nav-link" href="/watchlist/movies">Watchlist</a>
+              </li>
             @endif
           </ul>
           <ul class="navbar-nav ms-auto d-flex">

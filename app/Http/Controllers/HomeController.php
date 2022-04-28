@@ -17,6 +17,16 @@ class HomeController extends Controller
         return view('movies.moviesHome');
     }
 
+    public function openMoviesPageByCategory($category)
+    {
+        return view('movies.moviesCategory')->with('category', $category);
+    }
+
+    public function openMovieById($id)
+    {
+        return view('movies.moviesOpen')->with('id', $id);
+    }
+
     public function openTVSeriesPage()
     {
         return view('tvseries.tvserieshome');
@@ -118,6 +128,9 @@ class HomeController extends Controller
 
     public function openEditMoviePage(Request $request)
     {
+        if($request->has('open')){
+            return view('movies.moviesOpen')->with('id', $id);
+        }
         $movieid = $request->input('movieid');
         $movies = DB::table('movies')->where('id', $movieid)->get();
         foreach($movies as $movie){

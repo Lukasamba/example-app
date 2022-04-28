@@ -47,10 +47,14 @@
                   <td>{{$movie->releaseDate}}</td>
                   <td>{{$movie->length}}</td>
                   <td>
-                      <form action="{{route('openEditMoviePage')}}" method="POST">
+                      <form style="float:left" class="me-1" action="/movie/{{$movie->id}}" method="POST">
+                        @csrf
+                        <button type="submit" name="open" value="open" class="btn btn-primary">Open</button>
+                      </form>
+                      <form class="form-inline" action="{{route('openEditMoviePage')}}" method="POST">
                         @csrf
                         <input type="hidden" name="movieid" id="movieid" value="{{$movie->id}}">
-                        <button type="submit" name="update" value="update" class="btn btn-warning">Update</button>
+                        <button type="submit" name="update" value="update" class="btn btn-warning">Edit</button>
                         <button type="submit" name="delete" value="delete" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                       </form>
                   </td>

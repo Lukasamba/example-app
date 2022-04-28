@@ -6,11 +6,11 @@
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="name" name="name" class="form-control" id="name" value="{{$name}}">
+            <input type="name" name="name" class="form-control" id="name" value="{{$name}}" required>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" name="email" class="form-control" id="email" value="{{$email}}">
+            <input type="email" name="email" class="form-control" id="email" value="{{$email}}" required>
         </div>
         <div class="mb-3">
             <input type="hidden" name="id" id="id" value="{{$id}}">
