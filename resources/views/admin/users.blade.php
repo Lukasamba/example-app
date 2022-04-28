@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group" style="float: right">
                             <input type="hidden" name="userid" id="userid" value="{{$user->id}}">
-                            @if (($user->id) == 1)
+                            @if (($user->id) == 4)
                               <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure?')" disabled>Save</button>
                             @else
                               <button type="submit" class="btn btn-warning" onclick="return confirm('Are you sure?')">Save</button>
