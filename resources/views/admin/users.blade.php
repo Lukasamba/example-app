@@ -67,7 +67,7 @@
                       <form action="{{route('editOrDelete')}}" method="POST">
                         @csrf
                         <input type="hidden" name="userid" id="userid" value="{{$user->id}}">
-                        @if (($user->id) == 1)
+                        @if (($user->id) == 4)
                           <button type="submit" name="update" value="update" class="btn btn-warning" disabled>Update</button>
                           <button type="submit" name="delete" value="delete" class="btn btn-danger" disabled>Delete</button>
                         @else
