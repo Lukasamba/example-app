@@ -47,8 +47,11 @@
             <div class="ms-5 me-5" style="width: 60%">
                 <h6>{{$description}}</h6>
                 @php
-                    $userid = Session()->get('userInfo')['id'];
+                    if(Session()->has('userInfo')){
+                        $userid = Session()->get('userInfo')['id'];
+                    }
                 @endphp
+                @if (Session()->has('userInfo'))
                 @if (!DB::table('watchlists')->where('UserId', $userid)->where('ItemId', $id)->exists())
                 <form action="/movie/{{$id}}/addtowatchlist" method="POST">
                     @csrf
@@ -63,6 +66,7 @@
                     <input type="hidden" name="itemid" id="itemid" value="{{$id}}">
                     <button type="submit" class="btn btn-danger">Delete from watchlist</button>
                 </form>
+                @endif
                 @endif
             </div>
         </div>
