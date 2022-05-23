@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\User;
 use Hash;
 use DB;
@@ -38,26 +39,52 @@ class LoginController extends Controller
 
     public function showProfile()
     {
-        $userid = Session::get('userInfo')['id'];
-        $users = DB::table('users')->where('id', $userid)->get();
-        foreach($users as $user){
-            $id = $user->id;
-            $name = $user->name;
-            $email = $user->email;
-        }
-        return view('user.profile')->with('id', $id)->with('name', $name)->with('email', $email);
+        $user = User::get();
+        return view('user.profile', [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email
+        ]);
     }
 
     public function saveEditedProfile(Request $request)
     {
-        $id = $request->input('id');
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $result = DB::table('users')->where('id', $id)->update([
-            'name' => $name,
-            'email' => $email
+        $id = session()->get('userInfo')['id'];
+        $request->validate([
+            'name'=>'required',
+            'email'=> [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id),
+            ],
+            'oldpassword'=>'required|min:5|max:20',
+            'newpassword'=>'required|min:5|max:20'
         ]);
-        return view('user.profile')->with('id', $id)->with('name', $name)->with('email', $email);
+        $user = User::find($request->input('id'));
+        if(Hash::check($request->oldpassword, $user->password)){
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->newpassword);
+            $user->save();
+            $request->session()->put('userInfo', [
+                'id' => $user->id,
+                'isAdmin' => $user->admin
+            ]);
+            $user = User::get();
+            return view('user.profile', [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email
+            ])->with(['success' => 'Password changed.']);
+        }
+        else {
+            $user = User::get();
+            return view('user.profile', [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email
+            ])->with(['fail' => 'Password does not match.']);
+        }
     }
 
     public function logout()

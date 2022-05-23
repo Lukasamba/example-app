@@ -31,9 +31,6 @@
                 </tr>
               </thead>
               <tbody>
-                @php
-                    $movies = DB::table('movies')->get();
-                @endphp
                 @foreach ($movies as $movie)
                 <tr>
                   <th>{{$movie->id}}</th>

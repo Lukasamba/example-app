@@ -18,9 +18,6 @@
                 </tr>
               </thead>
               <tbody>
-                @php
-                    $users = DB::table('users')->get();
-                @endphp
                 @foreach ($users as $user)
                 <tr>
                   <th>{{$user->id}}</th>

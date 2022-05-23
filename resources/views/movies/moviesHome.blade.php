@@ -40,10 +40,6 @@
   <div class="text-dark rounded bg-dark mt-5 me-5 pt-2 pe-5 pb-5" style="width: 75%; float: right">
 
     <div class="ms-3 mt-1 row row-cols-1 row-cols-md-5 g-4">
-      @php
-        $movies = DB::table('movies')->get();
-      @endphp
-
       @foreach ($movies as $movie)
           
       <div class="col">

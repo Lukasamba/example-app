@@ -2,20 +2,6 @@
 
 @section('content')
   
-@php
-    $movies = DB::table('movies')->where('id', $id)->get();
-    foreach($movies as $movie){
-        $id = $movie->id;
-        $name = $movie->name;
-        $description = $movie->description;
-        $rating = $movie->rating;
-        $category = $movie->category;
-        $imageUrl = $movie->imageUrl;
-        $releaseDate = $movie->releaseDate;
-        $length = $movie->length;
-    }
-@endphp
-
 <div class="container mt-5 bg-dark text-light">
     <div class="ms-5 pt-5 pb-5">
         <div>
@@ -46,13 +32,8 @@
             </div>
             <div class="ms-5 me-5" style="width: 60%">
                 <h6>{{$description}}</h6>
-                @php
-                    if(Session()->has('userInfo')){
-                        $userid = Session()->get('userInfo')['id'];
-                    }
-                @endphp
                 @if (Session()->has('userInfo'))
-                @if (!DB::table('watchlists')->where('UserId', $userid)->where('ItemId', $id)->exists())
+                @if (!$isOnWatchlist)
                 <form action="/movie/{{$id}}/addtowatchlist" method="POST">
                     @csrf
                     <input type="hidden" name="movies" id="movies" value="movies">
