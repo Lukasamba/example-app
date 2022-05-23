@@ -7,7 +7,7 @@
         </div>
         @foreach ($movies as $movie)
             <div class="d-flex">
-                <div class="card h-100 ms-3" style="max-width:220px; ">
+                <div class="card h-100 ms-3" style="width:220px; ">
                     <form action="/movie/{{$movie->id}}" method="POST">
                         @csrf
                             <input type="image" alt="submit" src="{{$movie->imageUrl}}" style="height: 300px; object-fit: cover" class="mx-auto card-img-top">
@@ -22,7 +22,7 @@
         </div>
         @foreach ($tvseries as $tvserie)
             <div class="d-flex">
-                <div class="card h-100 ms-3" style="max-width:220px; ">
+                <div class="card h-100 ms-3" style="width:220px; ">
                     <form action="/tvserie/{{$tvserie->id}}" method="POST">
                         @csrf
                         <input type="image" alt="submit" src="{{$tvserie->imageUrl}}" style="align-content: center; height: 300px; object-fit: cover" class="mx-auto card-img-top">
@@ -37,7 +37,7 @@
         </div>
         @foreach ($games as $game)
             <div class="d-flex">
-                <div class="card h-100 ms-3" style="max-width:220px; ">
+                <div class="card h-100 ms-3" style="width:220px; ">
                     <form action="/game/{{$game->id}}" method="POST">
                         @csrf
                         <input type="image" alt="submit" src="{{$game->imageUrl}}" style="height: 300px; object-fit: cover" class="mx-auto card-img-top">
