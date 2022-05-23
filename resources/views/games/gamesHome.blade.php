@@ -31,16 +31,16 @@
         </li>
     </ul>
   </div>
-  <div class="text-dark rounded bg-dark mt-5 me-5 pt-2 pe-5 pb-5" style="width: 75%; float: right">
+  <div class="text-dark rounded bg-dark mt-5 mb-5 me-5 pt-2 pe-5 pb-5" style="width: 75%; float: right">
 
     <div class="ms-3 mt-1 row row-cols-1 row-cols-md-5 g-4">
       @foreach ($games as $game)
           
       <div class="col">
         <div class="card h-100">
-            <form action="/game/{{$game->id}}" method="POST">
+            <form action="/game/{{$game->id}}" method="POST" style="max-width:220px; ">
                 @csrf
-                <input type="image" alt="submit" src="{{$game->imageUrl}}" style="max-width:fit-content; object-fit: cover" class="mx-auto card-img-top">
+                <input type="image" alt="submit" src="{{$game->imageUrl}}" style="height: 300px; object-fit: cover" class="mx-auto card-img-top">
             </form>
             <div class="card-body">
                 <h5 class="card-title">{{$game->name}}</h5>
