@@ -46,6 +46,9 @@
             @else
 
             <li class="nav-item">
+              <a class="nav-link">{{session()->get('userInfo')['name']}}</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">

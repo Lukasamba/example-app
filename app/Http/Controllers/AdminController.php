@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Movie;
+use App\Models\TVSeries;
+use App\Models\Game;
 use App\Models\Watchlist;
+use App\Models\TVSeriesWatchlist;
+use App\Models\GamesWatchlist;
 use DB;
 
 class AdminController extends Controller
@@ -30,14 +34,198 @@ class AdminController extends Controller
         ]);
     }
 
-    public function openTVSeriesList()
-    {
-        return view('admin.tvseries');
-    }
-
     public function openGamesList()
     {
-        return view('admin.games');
+        return view('admin.games', [
+            'games' => Game::getAllGames()
+        ]);
+    }
+
+    public function openAddGamePage()
+    {
+        return view('games.add', [
+            'games' => Game::getAllGames()
+        ]);
+    }
+
+    public function addGame(Request $request)
+    {
+        $game = new Game;
+        $game->name = $request->input('name');
+        $game->description = $request->input('description');
+        $game->rating = $request->input('rating');
+        $game->category = $request->input('category');
+        $game->imageUrl = $request->input('imageUrl');
+        $game->releaseDate = $request->input('releaseDate');
+        $game->save();
+
+        return view('admin.games', [
+            'games' => Game::getAllGames()
+        ]);
+    }
+
+    public function openEditGamePage(Request $request)
+    {
+        if($request->has('open')){
+            $userid = Session()->get('userInfo')['id'];
+            if(!GamesWatchlist::where('UserId', $userid)->where('ItemId', $id)->exists())
+            {
+                return view('games.open', [
+                    'id' => $id,
+                    'isOnWatchlist' => false
+                ]);
+            }
+            else
+            {
+                return view('games.open', [
+                    'id' => $id,
+                    'isOnWatchlist' => true
+                ]);
+            }
+        }
+        $gameid = $request->input('gameid');
+        $game = Game::where('id', $gameid)->first();
+
+        if($request->has('update')){
+            return view('games.edit')
+                                    ->with('id', $game->id)
+                                    ->with('name', $game->name)
+                                    ->with('description', $game->description)
+                                    ->with('rating', $game->rating)
+                                    ->with('category', $game->category)
+                                    ->with('imageUrl', $game->imageUrl)
+                                    ->with('releaseDate', $game->releaseDate);
+        }
+        else {
+            Game::where('id', $game->id)->delete();
+            return view('admin.games', [
+                'games' => Game::getAllGames()
+            ]);
+        }
+    }
+
+    public function saveEditedGameInfo(Request $request)
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $rating = $request->input('rating');
+        $category = $request->input('category');
+        $imageUrl = $request->input('imageUrl');
+        $releaseDate = $request->input('releaseDate');
+
+        Game::where('id', $id)->update([
+            'name' => $name,
+            'description' => $description,
+            'rating' => $rating,
+            'category' => $category,
+            'imageUrl' => $imageUrl,
+            'releaseDate' => $releaseDate
+        ]);
+        return view('admin.games', [
+            'games' => Game::getAllGames()
+        ]);
+    }
+
+    public function openTVSeriesList()
+    {
+        return view('admin.tvseries', [
+            'tvseries' => TVSeries::getAllTVSeries()
+        ]);
+    }
+
+    public function openAddTVSeriesPage()
+    {
+        return view('tvseries.add', [
+            'tvseries' => TVSeries::getAllTVSeries()
+        ]);
+    }
+
+    public function addTVSeries(Request $request)
+    {
+        $tvseries = new TVSeries;
+        $tvseries->name = $request->input('name');
+        $tvseries->description = $request->input('description');
+        $tvseries->rating = $request->input('rating');
+        $tvseries->category = $request->input('category');
+        $tvseries->imageUrl = $request->input('imageUrl');
+        $tvseries->releaseDate = $request->input('releaseDate');
+        $tvseries->seasons = $request->input('seasons');
+        $tvseries->episodes = $request->input('episodes');
+        $tvseries->save();
+
+        return view('admin.tvseries', [
+            'tvseries' => TVSeries::getAllTVSeries()
+        ]);
+    }
+
+    public function openEditTVSeriesPage(Request $request)
+    {
+        if($request->has('open')){
+            $userid = Session()->get('userInfo')['id'];
+            if(!TVSeriesWatchlist::where('UserId', $userid)->where('ItemId', $id)->exists())
+            {
+                return view('tvseries.open', [
+                    'id' => $id,
+                    'isOnWatchlist' => false
+                ]);
+            }
+            else
+            {
+                return view('tvseries.open', [
+                    'id' => $id,
+                    'isOnWatchlist' => true
+                ]);
+            }
+        }
+        $tvserieid = $request->input('tvserieid');
+        $tvserie = TVSeries::where('id', $tvserieid)->first();
+
+        if($request->has('update')){
+            return view('tvseries.edit')
+                                    ->with('id', $tvserie->id)
+                                    ->with('name', $tvserie->name)
+                                    ->with('description', $tvserie->description)
+                                    ->with('rating', $tvserie->rating)
+                                    ->with('category', $tvserie->category)
+                                    ->with('imageUrl', $tvserie->imageUrl)
+                                    ->with('releaseDate', $tvserie->releaseDate)
+                                    ->with('seasons', $tvserie->seasons)
+                                    ->with('episodes', $tvserie->episodes);
+        }
+        else {
+            TVSeries::where('id', $tvserie->id)->delete();
+            return view('admin.tvseries', [
+                'tvseries' => TVSeries::getAllTVSeries()
+            ]);
+        }
+    }
+
+    public function saveEditedTVSeriesInfo(Request $request)
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $rating = $request->input('rating');
+        $category = $request->input('category');
+        $imageUrl = $request->input('imageUrl');
+        $releaseDate = $request->input('releaseDate');
+        $seasons = $request->input('seasons');
+        $episodes = $request->input('episodes');
+
+        TVSeries::where('id', $id)->update([
+            'name' => $name,
+            'description' => $description,
+            'rating' => $rating,
+            'category' => $category,
+            'imageUrl' => $imageUrl,
+            'releaseDate' => $releaseDate,
+            'seasons' => $seasons,
+            'episodes' => $episodes
+        ]);
+        return view('admin.tvseries', [
+            'tvseries' => TVSeries::getAllTVSeries()
+        ]);
     }
 
     public function changeUserAdminStatus(Request $request)

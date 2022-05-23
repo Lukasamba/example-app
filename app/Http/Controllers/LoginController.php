@@ -26,7 +26,8 @@ class LoginController extends Controller
             if(Hash::check($request->password, $user->password)){
                 $request->session()->put('userInfo', [
                     'id' => $user->id,
-                    'isAdmin' => $user->admin
+                    'isAdmin' => $user->admin,
+                    'name' => $user->name
                 ]);
                 return redirect('');
             } else {

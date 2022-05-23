@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->longText('description');
-            $table->double('rating');
-            $table->string('category');
-            $table->string('imageUrl');
-            $table->integer('releaseDate');
-            $table->string('length');
+        Schema::create('t_v_series_watchlists', function (Blueprint $table) {
+            $table->foreignId('UserId')->constrained('users');
+            $table->foreignId('ItemId')->constrained('t_v_series');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('t_v_series_watchlists');
     }
 };

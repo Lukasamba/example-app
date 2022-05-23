@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create('t_v_series', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->longText('description');
@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('category');
             $table->string('imageUrl');
             $table->integer('releaseDate');
-            $table->string('length');
+            $table->integer('seasons');
+            $table->integer('episodes');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('t_v_series');
     }
 };

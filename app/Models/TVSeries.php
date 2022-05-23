@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Movie extends Model
+class TVSeries extends Model
 {
     use HasFactory;
 
@@ -16,31 +16,32 @@ class Movie extends Model
         'category',
         'imageUrl',
         'releaseDate',
-        'length'
+        'seasons',
+        'episodes'
     ];
 
     public static function get($id)
     {
-        $movie = Movie::where('id', $id)->first();
-        if($movie)
+        $tvserie = TVSeries::where('id', $id)->first();
+        if($tvserie)
         {
-            return $movie;
+            return $tvserie;
         }
         else return false;
     }
 
-    public static function getAllMovies()
+    public static function getAllTVSeries()
     {
-        return Movie::all();
+        return TVSeries::all();
     }
 
-    public static function getMoviesByCategory($category)
+    public static function getTVSeriesByCategory($category)
     {
-        return Movie::where('category', $category)->get();
+        return TVSeries::where('category', $category)->get();
     }
 
     public static function getLastThree()
     {
-        return Movie::orderBy('id', 'desc')->take(5)->get();
+        return TVSeries::orderBy('id', 'desc')->take(5)->get();
     }
 }

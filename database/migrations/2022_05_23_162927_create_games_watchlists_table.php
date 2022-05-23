@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('movies', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->longText('description');
-            $table->double('rating');
-            $table->string('category');
-            $table->string('imageUrl');
-            $table->integer('releaseDate');
-            $table->string('length');
+        Schema::create('games_watchlists', function (Blueprint $table) {
+            $table->foreignId('UserId')->constrained('users');
+            $table->foreignId('ItemId')->constrained('games');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('games_watchlists');
     }
 };

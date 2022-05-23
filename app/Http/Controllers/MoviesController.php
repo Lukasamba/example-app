@@ -29,20 +29,37 @@ class MoviesController extends Controller
         $movie = Movie::get($id);
         if($movie)
         {
-            $userid = Session()->get('userInfo')['id'];
-            if(!Watchlist::where('UserId', $userid)->where('ItemId', $id)->exists())
+            if (session()->has('userInfo'))
             {
-                return view('movies.moviesOpen', [
-                    'id' => $movie->id,
-                    'name' => $movie->name,
-                    'description' => $movie->description,
-                    'rating' => $movie->rating,
-                    'category' => $movie->category,
-                    'imageUrl' => $movie->imageUrl,
-                    'releaseDate' => $movie->releaseDate,
-                    'length' => $movie->length,
-                    'isOnWatchlist' => false
-                ]);
+                $userid = session()->get('userInfo')['id'];
+                if(!Watchlist::where('UserId', $userid)->where('ItemId', $id)->exists())
+                {
+                    return view('movies.moviesOpen', [
+                        'id' => $movie->id,
+                        'name' => $movie->name,
+                        'description' => $movie->description,
+                        'rating' => $movie->rating,
+                        'category' => $movie->category,
+                        'imageUrl' => $movie->imageUrl,
+                        'releaseDate' => $movie->releaseDate,
+                        'length' => $movie->length,
+                        'isOnWatchlist' => false
+                    ]);
+                }
+                else
+                {
+                    return view('movies.moviesOpen', [
+                        'id' => $movie->id,
+                        'name' => $movie->name,
+                        'description' => $movie->description,
+                        'rating' => $movie->rating,
+                        'category' => $movie->category,
+                        'imageUrl' => $movie->imageUrl,
+                        'releaseDate' => $movie->releaseDate,
+                        'length' => $movie->length,
+                        'isOnWatchlist' => true
+                    ]);
+                }
             }
             else
             {
@@ -54,8 +71,7 @@ class MoviesController extends Controller
                     'category' => $movie->category,
                     'imageUrl' => $movie->imageUrl,
                     'releaseDate' => $movie->releaseDate,
-                    'length' => $movie->length,
-                    'isOnWatchlist' => true
+                    'length' => $movie->length
                 ]);
             }
         }

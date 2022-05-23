@@ -21,6 +21,15 @@ return new class extends Migration
             $table->string('admin')->default('NO');
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            [
+                'name' => 'Admin',
+                'email' => 'admin@email.com',
+                'password' => Hash::make('admin'),
+                'admin' => 'YES'
+            ]
+        ]);
     }
 
     /**
