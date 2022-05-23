@@ -69,7 +69,8 @@ class LoginController extends Controller
             $user->save();
             $request->session()->put('userInfo', [
                 'id' => $user->id,
-                'isAdmin' => $user->admin
+                'isAdmin' => $user->admin,
+                'name' => $user->name
             ]);
             $user = User::get();
             return view('user.profile', [

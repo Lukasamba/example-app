@@ -34,7 +34,7 @@
             @endif
           </ul>
           <ul class="navbar-nav ms-auto d-flex">
-            @if (!Session::has('userInfo'))
+            @if (!session()->has('userInfo'))
                 
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>

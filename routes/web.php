@@ -12,7 +12,7 @@ use App\Http\Controllers\TVSeriesController;
 use App\Http\Controllers\GamesController;
 
 // Start
-Route::get('', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
 // Everything about Authorization
 Route::get('/register', [RegistrationController::class, 'index'])->middleware('alreadyLoggedIn');
